@@ -7,8 +7,7 @@
     <title>User</title>
     <link rel="stylesheet" href="styles.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 
 </head>
@@ -17,14 +16,20 @@
     <header>
         <h1>Usuarios</h1>
     </header>
-
+    <?php
+    include "modelo/conexion.php";
+    include "controlador/eliminarU.php";
+    ?>
 
     <div class="container-fluid row">
         <form class="col-4" method="POST">
+            <?php
+            include "modelo/conexion.php";
+            include "controlador/registrarU.php";
+            ?>
             <div class="mb-3">
                 <label for="nombre_usuario" class="form-label">Nombre de usuario</label>
-                <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario"
-                    aria-describedby="nombre_usuario">
+                <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" aria-describedby="nombre_usuario">
             </div>
             <div class="mb-3">
                 <label for="contraseña" class="form-label">Contraseña</label>
@@ -49,22 +54,20 @@
                 </thead>
                 <tbody>
                     <?php
-            include "modelo/conexion.php";
-            $sql = $conexion->query("SELECT * FROM Usuarios");
-            while ($datos = $sql->fetch_object()) {
-            ?>
-                    <tr>
-                        <th scope="row"><?php echo $datos->id; ?></th>
-                        <td><?php echo $datos->nombre_usuario; ?></td>
-                        <td><?php echo $datos->contraseña; ?></td>
-                        <td><?php echo $datos->correo_electronico; ?></td>
-                        <td>
-                            <a href="editar_usuarios.php?id=<?= $datos->id ?>"
-                                class="btn btn-small btn-warning">Editar</a>
-                            <a href="eliminar_usuarios.php?id=<?= $datos->id ?>"
-                                class="btn btn-small btn-danger">Eliminar</a>
-                        </td>
-                    </tr>
+                    include "modelo/conexion.php";
+                    $sql = $conexion->query("SELECT * FROM Usuarios");
+                    while ($datos = $sql->fetch_object()) {
+                    ?>
+                        <tr>
+                            <th scope="row"><?php echo $datos->id; ?></th>
+                            <td><?php echo $datos->nombre_usuario; ?></td>
+                            <td><?php echo $datos->contraseña; ?></td>
+                            <td><?php echo $datos->coreo_electronico; ?></td>
+                            <td>
+                                <a href="editar_user.php?id=<?= $datos->id ?>" class="btn btn-small btn-warning">Editar</a>
+                                <a href="usuarios.php?id=<?= $datos->id ?>" class="btn btn-small btn-danger">Eliminar</a>
+                            </td>
+                        </tr>
                     <?php } ?>
                 </tbody>
             </table>
@@ -74,8 +77,7 @@
 
     </div>
 
-    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 </body>
 
